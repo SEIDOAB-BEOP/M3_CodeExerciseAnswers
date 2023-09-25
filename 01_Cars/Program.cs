@@ -1,4 +1,5 @@
-﻿using Helpers;
+﻿using System.Reflection;
+using Helpers;
 
 namespace _01_Cars;
 
@@ -14,12 +15,33 @@ class Program
     }
     public enum enCarModel
     {
-        Boxmodel, Mustang_GT, XF, Civic
+        Boxmodel, Mustang_GT, Golf, V70, XF, Civic
     }
     class csCar
     {
-        public enCarColor Color;
+        public enCarColor Color { get; set; }
+        public enCarBrand Brand { get; set; }
+        public enCarModel Model { get; set; }
 
+        public string WhoAmI()
+        {
+            string _s = $"I am a {Color} {Brand} {Model}";
+            return _s;
+        }
+
+        public csCar()
+        {
+            var rnd = new csSeedGenerator();
+
+            //alternative to SeedGenerator
+            var rnd1 = new Random();
+            Model =  (enCarModel) rnd1.Next((int)enCarModel.Boxmodel, (int)enCarModel.Civic + 1);
+
+
+            Color = rnd.FromEnum<enCarColor>();
+            Brand = rnd.FromEnum<enCarBrand>();
+            Model = rnd.FromEnum<enCarModel>();
+        }
     }
 
 
@@ -27,6 +49,14 @@ class Program
     {
         Console.WriteLine("Class exploration with Cars!");
 
+        csCar car1 = new csCar();
+        string s = car1.WhoAmI();
+        Console.WriteLine(s);
+
+        csCar car2 = new csCar();
+        Console.WriteLine(car2.WhoAmI());
+
+        /*
         #region how To use the seed generator
         var rnd = new csSeedGenerator();
 
@@ -40,6 +70,7 @@ class Program
         //A random enCarModel
         Console.WriteLine(rnd.FromEnum<enCarModel>());
         #endregion
+        */
 
     }
 
@@ -47,10 +78,12 @@ class Program
     //1. Make class csCar public field Color a public property with getters and setters
     //2. Create two new public properties in class csCar, Brand, Model
     //   (of types enCarBrand and enCarModel)
+
     //3. Create an empty class constructor to csCar that sets Color, Brand and Model to
     //   Random values
     //4. Create a method public method WhoAmI() that presents for example
     //   "I am a Red Ford Mustang_GT";
+
     //5. In Main(), create two variables, car1, car2 and instantiate from csCar
     //   - printout WhoAmI of car1 and car2
 
