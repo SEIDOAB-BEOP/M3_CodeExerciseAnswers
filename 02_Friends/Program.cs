@@ -8,16 +8,30 @@ public enum enFriendLevel
 }
 public class csFriend
 {
+    public string Name1 { get; set; }
+    public string Name2;
+
     private string _name;
     public string Name
     {
-        get => _name;
-        set => _name = value;
+        get
+        {
+            string tmp = _name + " Hello from Martin";
+            return tmp;
+        }
+        set
+        {
+            _name = value;
+        }
     }
 
     public string Email { get; set; }
     public enFriendLevel Level { get; set; }
 
+    public csFriend()
+    {
+
+    }
     public csFriend(string name, string email, enFriendLevel level)
     {
         Name = name;
@@ -32,8 +46,19 @@ class Program
     {
         Console.WriteLine("Hello, Friends!");
 
-        var friend = new csFriend("Martin", "martin@gmail.com", enFriendLevel.ClassMate);
-        Console.WriteLine(friend.Name);
+        var f = new csFriend();
+        f.Name1 = "Hello";
+        f.Name2 = "Good Bye";
+
+        f.Name = "Stefan";
+        Console.WriteLine(f.Name);
+
+        Console.WriteLine(f.Name1);
+        Console.WriteLine(f.Name2);
+
+
+        // var friend = new csFriend("Martin", "martin@gmail.com", enFriendLevel.ClassMate);
+        // Console.WriteLine(friend.Name);
 
         /*
         #region how create a Random Name and Email address

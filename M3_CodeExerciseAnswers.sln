@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpers", "SeedGenerator\He
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02_Friends", "02_Friends\02_Friends.csproj", "{404B4145-9877-4E60-9589-68B382FC416E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03_Pearls", "03_Pearls\03_Pearls.csproj", "{7A5008D4-B1E1-4A4C-B6AA-FB610CE37671}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04_Wines", "04_Wines\04_Wines.csproj", "{2897970D-EC00-457C-AB80-777EA4CEB457}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{404B4145-9877-4E60-9589-68B382FC416E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{404B4145-9877-4E60-9589-68B382FC416E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{404B4145-9877-4E60-9589-68B382FC416E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A5008D4-B1E1-4A4C-B6AA-FB610CE37671}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A5008D4-B1E1-4A4C-B6AA-FB610CE37671}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A5008D4-B1E1-4A4C-B6AA-FB610CE37671}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A5008D4-B1E1-4A4C-B6AA-FB610CE37671}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2897970D-EC00-457C-AB80-777EA4CEB457}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2897970D-EC00-457C-AB80-777EA4CEB457}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2897970D-EC00-457C-AB80-777EA4CEB457}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2897970D-EC00-457C-AB80-777EA4CEB457}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
