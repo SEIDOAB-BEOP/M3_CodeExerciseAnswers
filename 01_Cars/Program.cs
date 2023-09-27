@@ -3,7 +3,7 @@ using Helpers;
 
 namespace _01_Cars;
 
-class Program
+public class Program
 {
     public enum enCarColor
     {
@@ -17,11 +17,11 @@ class Program
     {
         Boxmodel, Mustang_GT, Golf, V70, XF, Civic
     }
-    class csCar
+    public class csCar
     {
         public enCarColor Color { get; set; }
-        public enCarBrand Brand { get; set; }
-        public enCarModel Model { get; set; }
+        public enCarBrand Brand { get; init; }
+        public enCarModel Model { get; init; }
 
         public string WhoAmI()
         {
@@ -55,6 +55,13 @@ class Program
 
         csCar car2 = new csCar();
         Console.WriteLine(car2.WhoAmI());
+
+        //Create 1000 cars
+        csCar[] cars = new csCar[1000];
+        for (int i = 0; i < 1000; i++)
+        {
+            cars[i] = new csCar() { Color = enCarColor.Burgundy };
+        }
 
         /*
         #region how To use the seed generator
