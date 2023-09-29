@@ -32,24 +32,30 @@ public class csCar
     public enCarBrand Brand { get; init; }
     public enCarModel Model { get; set; }
 
-    public string WhoAmI()
+    public csCar() { }
+    public csCar(enCarColor _color, enCarBrand _brand, enCarModel _model)
     {
-        string _s = $"I am a {Color} {Brand} {Model}";
-        return _s;
+        Color = _color;
+        Brand = _brand;
+        Model = _model;
     }
-
-    public csCar()
+    public csCar(csCar org)
     {
-        var rnd = new csSeedGenerator();
+        Color = org.Color;
+        Brand = org.Brand;
+        Model = org.Model;
+    }
+    public csCar(csSeedGenerator _seeder)
+    {
 
         //alternative to SeedGenerator
         var rnd1 = new Random();
         Model = (enCarModel)rnd1.Next((int)enCarModel.Boxmodel, (int)enCarModel.Civic + 1);
 
 
-        Color = rnd.FromEnum<enCarColor>();
-        Brand = rnd.FromEnum<enCarBrand>();
-        Model = rnd.FromEnum<enCarModel>();
+        Color = _seeder.FromEnum<enCarColor>();
+        Brand = _seeder.FromEnum<enCarBrand>();
+        Model = _seeder.FromEnum<enCarModel>();
     }
 }
 
@@ -87,21 +93,20 @@ public class csFriend
         var sRet = $"{Name} is my {Level} and can be reached at {Email}.";
         if (Car != null)
         {
-            sRet += $" The car is a {Car.Color} {Car.Brand} {Car.Model}";
+            sRet += $"\n -The car is a {Car.Color} {Car.Brand} {Car.Model}";
         }
         return sRet;
     }
 
-    public csFriend()
+    public csFriend(csSeedGenerator _seeder)
     {
-        var rnd = new csSeedGenerator();
-        string _firstName = rnd.FirstName;
-        string _lastName = rnd.LastName;
+        string _firstName = _seeder.FirstName;
+        string _lastName = _seeder.LastName;
         Name = $"{_firstName} {_lastName}";
 
-        Email = rnd.Email(_firstName, _lastName);
-        Level = rnd.FromEnum<enFriendLevel>();
-        Car = new csCar();
+        Email = _seeder.Email(_firstName, _lastName);
+        Level = _seeder.FromEnum<enFriendLevel>();
+        Car = new csCar(_seeder);
     }
     public csFriend(string name, string email, enFriendLevel level)
     {
@@ -109,21 +114,41 @@ public class csFriend
         Email = email;
         Level = level;
     }
+    public csFriend(csFriend org)
+    {
+        Name = org.Name;
+        Email = org.Email;
+        Level = org.Level;
+        Car = new csCar(org.Car);
+    }
 }
 
 class Program
 {
     static void Main(string[] args)
     {
+        var rnd = new csSeedGenerator();
         Console.WriteLine("Hello, Friends!");
 
         csFriend[] friends = new csFriend[10];
         for (int i = 0; i < 10; i++)
         {
-            friends[i] = new csFriend();
+            friends[i] = new csFriend(rnd);
         }
 
         foreach (var item in friends)
+        {
+            Console.WriteLine(item);
+        }
+
+        Console.WriteLine("\nCopy of friends");
+        csFriend[] friends_copy = new csFriend[10];
+        for (int i = 0; i < friends_copy.Length; i++)
+        {
+            friends_copy[i] = new csFriend(friends[i]);
+        }
+
+        foreach (var item in friends_copy)
         {
             Console.WriteLine(item);
         }

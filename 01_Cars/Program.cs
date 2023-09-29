@@ -108,7 +108,7 @@ public class Program
         //Copy 10 cars
         Console.WriteLine("\nKopia av listan 10 bilar");
         csCar[] cars_copy = new csCar[10];
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < cars_copy.Length; i++)
         {
             cars_copy[i] = new csCar(cars[i]);
         }

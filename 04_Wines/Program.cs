@@ -1,4 +1,5 @@
-﻿using Helpers;
+﻿using System.Xml.Linq;
+using Helpers;
 
 namespace _04_Wines;
 
@@ -22,21 +23,33 @@ public class csWine
         return s;
     }
 
-    public static int NrOfBottles { get; set; } = 0;
-    
-    public csWine()
+    public csWine() { }
+    public csWine(csSeedGenerator _seeder)
     {
-        var rnd = new csSeedGenerator();
-
         string[] _names = "Chattaux de bueff, Chattaux de paraply, PutiPuti".Split(", ");
-        Name = _names[rnd.Next(0, _names.Length)];
+        Name = _names[_seeder.Next(0, _names.Length)];
 
-        GrapeType = rnd.FromEnum<enGrapeType>();
-        WineType = rnd.FromEnum<enWineType>();
-        Country = rnd.FromEnum<enCountry>();
-        Price = rnd.Next(50, 150);
-
-        csWine.NrOfBottles++;
+        GrapeType = _seeder.FromEnum<enGrapeType>();
+        WineType = _seeder.FromEnum<enWineType>();
+        Country = _seeder.FromEnum<enCountry>();
+        Price = _seeder.Next(50, 150);
+    }
+    public csWine(string _name, enCountry _country, enGrapeType _grapetype,
+        enWineType _wineType, decimal _price)
+    {
+        Name = _name;
+        GrapeType = _grapetype;
+        WineType = _wineType;
+        Country = _country;
+        Price = _price;
+    }
+    public csWine(csWine org)
+    {
+        Name = org.Name;
+        GrapeType = org.GrapeType;
+        WineType = org.WineType;
+        Country = org.Country;
+        Price = org.Price;
     }
 }
 
@@ -44,10 +57,11 @@ class Program
 {
     static void Main(string[] args)
     {
+        var rnd = new csSeedGenerator();
         Console.WriteLine("Hello, Wine World!");
 
         Console.WriteLine("A Single bottle");
-        var wine1 = new csWine();
+        var wine1 = new csWine(rnd);
         wine1.Price = 70M;
         Console.WriteLine(wine1);
 
@@ -56,7 +70,7 @@ class Program
         
         for (int i = 0; i < wines.Length; i++)
         {
-            wines[i] = new csWine();
+            wines[i] = new csWine(rnd);
         }
         
         for (int i = 0; i < wines.Length; i++)
@@ -85,7 +99,17 @@ class Program
         Console.WriteLine($"My most cheapest wine cost {minPrice}");
         Console.WriteLine($"Total wine cellar value is {totValue}");
 
-        Console.WriteLine($"Nr of bottles {csWine.NrOfBottles}");
+
+        Console.WriteLine("\nA copy of my winecellar");
+        csWine[] wines_copy = new csWine[10];
+        for (int i = 0; i < wines_copy.Length; i++)
+        {
+            wines_copy[i] = new csWine(wines[i]);
+        }
+        foreach (var item in wines_copy)
+        {
+            Console.WriteLine(item);
+        }
     }
 }
 

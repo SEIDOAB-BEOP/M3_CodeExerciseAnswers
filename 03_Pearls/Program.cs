@@ -30,13 +30,27 @@ public class csPearl
 
     public override string ToString() => $"{Size}mm {Color} {Shape} {Type} pearl.";
 
-    public csPearl()
+    public csPearl() { }
+    public csPearl(csSeedGenerator _seeder)
     {
-        var _seeder = new csSeedGenerator();
         Size = _seeder.Next(PearlMinSize, PearlMaxSize + 1);
         Color = _seeder.FromEnum<enPearlColor>();
         Shape = _seeder.FromEnum<enPearlShape>();
         Type = _seeder.FromEnum<enPearlType>();
+    }
+    public csPearl(int _size, enPearlColor _color, enPearlShape _shape, enPearlType _type)
+    {
+        Size = _size;
+        Color = _color;
+        Shape = _shape;
+        Type = _type;
+    }
+    public csPearl(csPearl org)
+    {
+        Size = org.Size;
+        Color = org.Color;
+        Shape = org.Shape;
+        Type = org.Type;
     }
 }
 
@@ -44,13 +58,14 @@ class Program
 {
     static void Main(string[] args)
     {
+        var rnd = new csSeedGenerator();
         Console.WriteLine("Hello, Perls!");
 
         //Create a necklace
         csPearl[] necklace = new csPearl[10];
         for (int i = 0; i < 10; i++)
         {
-            necklace[i] = new csPearl();
+            necklace[i] = new csPearl(rnd);
         }
 
         //Find min and max pear
@@ -80,6 +95,17 @@ class Program
         }
         Console.WriteLine($"Largest pearl: {necklace[maxIdx]}");
         Console.WriteLine($"Smalest pearl: {necklace[minIdx]}");
+
+        Console.WriteLine("\n\nA necklace copy");
+        csPearl[] necklace_copy = new csPearl[10];
+        for (int i = 0; i < necklace_copy.Length; i++)
+        {
+            necklace_copy[i] = new csPearl(necklace[i]);
+        }
+        foreach (var item in necklace_copy)
+        {
+            Console.WriteLine(item);
+        }
     }
 }
 
