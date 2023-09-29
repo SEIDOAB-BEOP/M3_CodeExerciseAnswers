@@ -21,6 +21,8 @@ public class csWine
         var s = $"Wine {Name} from {Country} is {WineType} and made from grapes {GrapeType}. The price is {Price:N2} Sek";
         return s;
     }
+
+    public static int NrOfBottles { get; set; } = 0;
     
     public csWine()
     {
@@ -33,6 +35,8 @@ public class csWine
         WineType = rnd.FromEnum<enWineType>();
         Country = rnd.FromEnum<enCountry>();
         Price = rnd.Next(50, 150);
+
+        csWine.NrOfBottles++;
     }
 }
 
@@ -80,6 +84,8 @@ class Program
         Console.WriteLine($"My most expensive wine cost {maxPrice}");
         Console.WriteLine($"My most cheapest wine cost {minPrice}");
         Console.WriteLine($"Total wine cellar value is {totValue}");
+
+        Console.WriteLine($"Nr of bottles {csWine.NrOfBottles}");
     }
 }
 
@@ -101,4 +107,15 @@ class Program
 // 5. Vilket är det billigaste och dyraste vinet i vinkällaren?
 //
 // 7. Vad är värdet av vinkällaren?
+//
+// --- Gör tills 4 Oktober
+// 8. Gör om construtor csWine() så att den tar en parameter (csSeedGenerator _seeder).
+//    Instantiera csSeedGeneratorn i Main() och modifiera koden så att den fungerar som innan.
+//
+// 9. Deklarera en contruktor som tillåter dig att själv bestämma alla csWine public properties
+//
+// 10.Deklarera en Copy constructor.
+//
+// 11.Använd copy constructorn för att skapa en ny lista av 10 viner med samma
+//    innehåll som ursprungslistan
 

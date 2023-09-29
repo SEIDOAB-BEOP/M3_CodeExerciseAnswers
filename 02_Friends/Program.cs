@@ -20,9 +20,17 @@ public enum enCarModel
 }
 public class csCar
 {
-    public enCarColor Color { get; set; }
+
+    private enCarColor _color;
+    public enCarColor Color
+    {
+        get => _color;
+      set => _color = value;
+    }
+
+
     public enCarBrand Brand { get; init; }
-    public enCarModel Model { get; init; }
+    public enCarModel Model { get; set; }
 
     public string WhoAmI()
     {
@@ -161,6 +169,16 @@ class Program
 //6. Modify ToString() in csFriend to also present the friends car if it exists (not null)
 
 //7. Modify the setter in Name so an Error is thrown if the new name is null or ""
+
+
+// --- Gör tills 4 Oktober
+// 8. Gör om construtor csFriend() så att den tar en parameter (csSeedGenerator _seeder).
+//    Instantiera csSeedGeneratorn i Main() och modifiera koden så att den fungerar som innan.
+//
+// 10. Deklarera en Copy constructor.
+//
+// 11. Använd copy constructorn för att skapa en ny lista av 10 vänner som är en kopia
+//     av ursprungslistan
 
 
 

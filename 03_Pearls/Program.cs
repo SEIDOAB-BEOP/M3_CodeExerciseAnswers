@@ -99,3 +99,12 @@ class Program
 //
 // 5. Vilken färg, form och typ har den minsta och den största pärlan i halsbandet?
 //
+// --- Gör tills 4 Oktober
+// 6. Gör om construtor csPearl() så att den tar en parameter (csSeedGenerator _seeder).
+//    Instantiera csSeedGeneratorn i Main() och modifiera koden så att den fungerar som innan.
+//
+// 7. Deklarera en contruktor som tillåter dig att själv bestämma alla csPearl public properties
+//
+// 8. Deklarera en Copy constructor.
+//
+// 9. Använd copy constructorn för att skapa ett nytt halsband som är en kopia av ursprunget
