@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Helpers
+﻿namespace Helpers
 {
     public class GoodQuote
     {
@@ -24,16 +22,21 @@ namespace Helpers
         //Seeded The instance
         public T Seed(csSeedGenerator seedGenerator);
     }
-    
+
     public class csSeedGenerator : Random
     {
-
+        #region Names
         string[] _firstnames = "Harry, Lord, Hermione, Albus, Severus, Ron, Draco, Frodo, Gandalf, Sam, Peregrin, Saruman".Split(", ");
         string[] _lastnames = "Potter, Voldemort, Granger, Dumbledore, Snape, Malfoy, Baggins, the Gray, Gamgee, Took, the White".Split(", ");
-
-
         string[] _petnames = "Max, Charlie, Cooper, Milo, Rocky, Wanda, Teddy, Duke, Leo, Max, Simba".Split(", ");
 
+        public string PetName => _petnames[this.Next(0, _petnames.Length)];
+        public string FirstName => _firstnames[this.Next(0, _firstnames.Length)];
+        public string LastName => _lastnames[this.Next(0, _lastnames.Length)];
+        public string FullName => $"{FirstName} {LastName}";
+        #endregion
+
+        #region Addresses
         string[][] _city =
             {
                 "Stockholm, Göteborg, Malmö, Uppsala, Linköping, Örebro".Split(", "),
@@ -52,10 +55,52 @@ namespace Helpers
 
         string[] _country = "Sweden, Norway, Denmark, Finland".Split(", ");
 
+        public string Country => _country[this.Next(0, _country.Length)];
+        public string City(string Country = null)
+        {
 
+            var cIdx = this.Next(0, _city.Length);
+            if (Country != null)
+            {
+                //Give a City in that specific country
+                cIdx = Array.FindIndex(_country, c => c.ToLower() == Country.Trim().ToLower());
+
+                if (cIdx == -1) throw new Exception("Country not found");
+            }
+
+            return _city[cIdx][this.Next(0, _city[cIdx].Length)];
+        }
+        public string StreetAddress(string Country = null)
+        {
+
+            var cIdx = this.Next(0, _city.Length);
+            if (Country != null)
+            {
+                //Give a City in that specific country
+                cIdx = Array.FindIndex(_country, c => c.ToLower() == Country.Trim().ToLower());
+
+                if (cIdx == -1) throw new Exception("Country not found");
+            }
+
+            return $"{_address[cIdx][this.Next(0, _address[cIdx].Length)]} {this.Next(1, 51)}";
+        }
+        public int ZipCode => this.Next(10101, 100000);
+        #endregion
+
+        #region Emails and phones
         string[] _domains = "icloud.com, me.com, mac.com, hotmail.com, gmail.com".Split(", ");
+        public string Email(string fname = null, string lname = null)
+        {
+            fname ??= FirstName;
+            lname ??= LastName;
 
+            return $"{fname}.{lname}@{_domains[this.Next(0, _domains.Length)]}";
+        }
 
+        public string PhoneNr => $"{this.Next(700, 800)} {this.Next(100, 1000)} {this.Next(100, 1000)}";
+        #endregion
+
+        #region Quotes
         GoodQuote[] _quotes = {
 
             //About Love
@@ -101,6 +146,11 @@ namespace Helpers
             new GoodQuote("Procrastinate now, don't put it off.","Ellen DeGeneres"),
         };
 
+        public List<GoodQuote> AllQuotes => _quotes.ToList<GoodQuote>();
+        public GoodQuote Quote => _quotes[this.Next(0, _quotes.Length)];
+        #endregion
+
+        #region Music
         string[] _musicbands = ("Led, Zeppelin, Queen, Pink, Floyd, Creedence, Clearwater, Revival, " +
                                 "Arosmith, Who, AC/DC, Rolling, Stones, Eagles, Deep, Purple, Prince, Dylan").Split(", ");
         string[] _musicalbums = ("Heaven, Rock, Moon, Cosmos, Walk, Hunky, Blue, Highway" +
@@ -108,15 +158,10 @@ namespace Helpers
 
         public string MusicBand => "The " + _musicbands[this.Next(0, _musicbands.Length)] + " " + _musicbands[this.Next(0, _musicbands.Length)];
         public string MusicAlbum => _musicalbums[this.Next(0, _musicalbums.Length)] + " " + _musicalbums[this.Next(0, _musicalbums.Length)];
+        #endregion
 
-
-        public string PetName => _petnames[this.Next(0, _petnames.Length)];
-
-        public string FirstName => _firstnames[this.Next(0, _firstnames.Length)];
-        public string LastName => _lastnames[this.Next(0, _lastnames.Length)];
-        public string FullName => $"{FirstName} {LastName}";
-
-        public DateTime getDateTime(int? fromYear = null, int? toYear = null)
+        #region DateTime, bool and decimal
+        public DateTime DateAndTime(int? fromYear = null, int? toYear = null)
         {
             bool dateOK = false;
             DateTime _date = default;
@@ -141,62 +186,27 @@ namespace Helpers
                 }
             }
 
-            return DateTime.SpecifyKind(_date, DateTimeKind.Utc); 
+            return DateTime.SpecifyKind(_date, DateTimeKind.Utc);
         }
 
-        //General random truefalse
         public bool Bool => (this.Next(0, 10) < 5) ? true : false;
 
-        public string Email(string fname = null, string lname = null)
+        public decimal NextDecimal(int _from, int _to) => this.Next(_from * 1000, _to * 1000) / 1000M;
+           
+
+        #endregion
+
+        #region From own Enum and List<TItem>
+        public string FromString(string _inputString, string _splitDelimiter = ", ")
         {
-            fname ??= FirstName;
-            lname ??= LastName;
-
-            return $"{fname}.{lname}@{_domains[this.Next(0, _domains.Length)]}";
+            var _sarray = _inputString.Split(_splitDelimiter);
+            return _sarray[this.Next(0, _sarray.Length)];
         }
-
-        public string Phone => $"{this.Next(700, 800)} {this.Next(100, 1000)} {this.Next(100, 1000)}";
-
-        public string Country => _country[this.Next(0, _country.Length)];
-
-        public string City(string Country = null)
-        {
-
-            var cIdx = this.Next(0, _city.Length);
-            if (Country != null)
-            {
-                //Give a City in that specific country
-                cIdx = Array.FindIndex(_country, c => c.ToLower() == Country.Trim().ToLower());
-
-                if (cIdx == -1) throw new Exception("Country not found");
-            }
-
-            return _city[cIdx][this.Next(0, _city[cIdx].Length)];
-        }
-
-        public string StreetAddress(string Country = null)
-        {
-
-            var cIdx = this.Next(0, _city.Length);
-            if (Country != null)
-            {
-                //Give a City in that specific country
-                cIdx = Array.FindIndex(_country, c => c.ToLower() == Country.Trim().ToLower());
-
-                if (cIdx == -1) throw new Exception("Country not found");
-            }
-
-            return $"{_address[cIdx][this.Next(0, _address[cIdx].Length)]} {this.Next(1, 51)}";
-        }
-
-        public int ZipCode => this.Next(10101, 100000);
-
-        #region Seed from own datastructures
-        public TEnum FromEnum<TEnum>() where TEnum:struct
+        public TEnum FromEnum<TEnum>() where TEnum : struct
         {
             if (typeof(TEnum).IsEnum)
             {
-               
+
                 var _names = typeof(TEnum).GetEnumNames();
                 var _name = _names[this.Next(0, _names.Length)];
 
@@ -210,7 +220,9 @@ namespace Helpers
         }
         #endregion
 
-        #region generate seeded Lists
+        #region Generate seeded List of TItem
+
+        //ISeed<TItem> has to be implemented to use this method
         public List<TItem> ToList<TItem>(int NrOfItems)
             where TItem : ISeed<TItem>, new()
         {
@@ -224,7 +236,7 @@ namespace Helpers
         }
 
         //Create a list of unique randomly seeded items
-        public List<TItem> ToListUnique<TItem>(int tryNrOfItems, List<TItem> appendToUnique = null)
+         public List<TItem> ToListUnique<TItem>(int tryNrOfItems, List<TItem> appendToUnique = null)
              where TItem : ISeed<TItem>, IEquatable<TItem>, new()
         {
             //Create a list of uniquely seeded items
@@ -232,7 +244,7 @@ namespace Helpers
 
             while (_set.Count < tryNrOfItems)
             {
-                var _item = new TItem().Seed(this);
+                var _item = new TItem() { Seeded = true }.Seed(this);
 
                 int _preCount = _set.Count();
                 int tries = 0;
@@ -243,20 +255,24 @@ namespace Helpers
                     if (_set.Count == _preCount)
                     {
                         //Item was already in the _set. Generate a new one
-                        _item = new TItem().Seed(this);
+                        _item = new TItem() { Seeded = true }.Seed(this);
                         ++tries;
+
+                        //Does not seem to be able to generate new unique item
+                        if (tries > 5)
+                            return _set.ToList();
                     }
 
-                } while (!(_set.Count > _preCount) && (tries < 5));
+                } while (_set.Count <= _preCount);
             }
 
             return _set.ToList();
         }
 
-
-        //Pick a number of unique items from a list of TItem (which does not have to be unique)
-        public List<TItem> FromListUnique<TItem>(int tryNrOfItems, List<TItem> list = null)
-        where TItem : ISeed<TItem>, IEquatable<TItem>, new()
+        //Pick a number of unique items from a list of TItem (the List does not have to be unique)
+        //IEquatable<TItem> has to be implemented to use this method
+        public List<TItem> PickFromListUnique<TItem>(int tryNrOfItems, List<TItem> list)
+        where TItem : IEquatable<TItem>
         {
             //Create a list of uniquely seeded items
             HashSet<TItem> _set = new HashSet<TItem>();
@@ -270,23 +286,23 @@ namespace Helpers
                 do
                 {
                     _set.Add(_item);
-                    if (++tries >= 5)
+
+                    if (_set.Count == _preCount)
                     {
-                        //it takes more than 5 tries to generate a random item.
-                        //Assume this is it. return the list
-                        return _set.ToList();
+                        //Item was already in the _set. Pick a new one
+                        _item = list[this.Next(0, list.Count)];
+                        ++tries;
+
+                        //Does not seem to be able to pick new unique item
+                        if (tries > 5)
+                            return _set.ToList();
                     }
-                } while (!(_set.Count > _preCount));
+
+                } while (_set.Count <= _preCount);
             }
 
             return _set.ToList();
         }
-
-        #endregion
-
-        #region Quotes
-        public List<GoodQuote> AllQuotes => _quotes.ToList<GoodQuote>();
-        public GoodQuote Quote => _quotes[this.Next(0, _quotes.Length)];
         #endregion
     }
 }

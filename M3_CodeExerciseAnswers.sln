@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03_Pearls", "03_Pearls\03_P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04_Wines", "04_Wines\04_Wines.csproj", "{2897970D-EC00-457C-AB80-777EA4CEB457}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06_Wines_Interfaces", "05_Wines_Interfaces\06_Wines_Interfaces.csproj", "{BAB27C0C-E20A-4D5C-BD46-B102FFFFBD0C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{2897970D-EC00-457C-AB80-777EA4CEB457}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2897970D-EC00-457C-AB80-777EA4CEB457}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2897970D-EC00-457C-AB80-777EA4CEB457}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAB27C0C-E20A-4D5C-BD46-B102FFFFBD0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAB27C0C-E20A-4D5C-BD46-B102FFFFBD0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAB27C0C-E20A-4D5C-BD46-B102FFFFBD0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAB27C0C-E20A-4D5C-BD46-B102FFFFBD0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -61,6 +61,19 @@ class Program
         var rnd = new csSeedGenerator();
         Console.WriteLine("Hello, Perls!");
 
+        var p = new csPearl(5, enPearlColor.White, enPearlShape.DropShaped, enPearlType.SaltWater);
+        Console.WriteLine(p);
+
+        var pc = new csPearl(p);
+        Console.WriteLine(pc);
+
+        var p2 = new csPearl(rnd);
+        Console.WriteLine(p2);
+
+        var p2c = new csPearl(p2);
+        Console.WriteLine(p2c);
+
+  
         //Create a necklace
         csPearl[] necklace = new csPearl[10];
         for (int i = 0; i < 10; i++)
@@ -106,6 +119,7 @@ class Program
         {
             Console.WriteLine(item);
         }
+
     }
 }
 

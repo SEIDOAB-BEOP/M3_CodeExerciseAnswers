@@ -7,7 +7,7 @@ public enum enGrapeType {Reissling, Tempranillo, Chardonay, Shiraz, CabernetSavi
 public enum enWineType { Red, White, Rose}
 public enum enCountry { Germany, France, Spain }
 
-public class csWine
+public struct csWine
 {
     public string Name { get; }
 
@@ -66,14 +66,15 @@ class Program
         Console.WriteLine(wine1);
 
         Console.WriteLine("\nA wine cellar");
-        csWine[] wines = new csWine[10];
+
+        List<csWine> wines = new List<csWine>();
         
-        for (int i = 0; i < wines.Length; i++)
+        for (int i = 0; i < 10; i++)
         {
-            wines[i] = new csWine(rnd);
+            wines.Add(new csWine(rnd));
         }
         
-        for (int i = 0; i < wines.Length; i++)
+        for (int i = 0; i < wines.Count; i++)
         {
             Console.WriteLine(wines[i]);
         }
@@ -81,7 +82,7 @@ class Program
         decimal maxPrice = decimal.MinValue;
         decimal minPrice = decimal.MaxValue;
         decimal totValue = 0;
-        for (int i = 0; i < wines.Length; i++)
+        for (int i = 0; i < wines.Count; i++)
         {
             if (wines[i].Price > maxPrice )
             {
@@ -101,15 +102,18 @@ class Program
 
 
         Console.WriteLine("\nA copy of my winecellar");
-        csWine[] wines_copy = new csWine[10];
-        for (int i = 0; i < wines_copy.Length; i++)
+        List<csWine> wines_copy = new List<csWine>();
+        for (int i = 0; i < wines.Count; i++)
         {
-            wines_copy[i] = new csWine(wines[i]);
+            wines_copy.Add(new csWine(wines[i]));
         }
         foreach (var item in wines_copy)
         {
             Console.WriteLine(item);
         }
+
+
+
     }
 }
 
