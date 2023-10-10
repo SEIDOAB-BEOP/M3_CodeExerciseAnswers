@@ -4,8 +4,13 @@ namespace _05_Wines_Interfaces
     public class WineCellar
     {
         public string Name { get; set; }
-        public List<IWine> Wines = new List<IWine>();
+        private List<IWine> Wines = new List<IWine>();
 
+
+        public void Add(IWine wine) => Wines.Add(wine);
+        public int Count => Wines.Count;
+        public IWine this[int idx] => Wines[idx];
+ 
         public decimal Value
         {
             get
@@ -24,7 +29,7 @@ namespace _05_Wines_Interfaces
             var sRet = "";
             foreach (var wine in Wines)
             {
-                sRet += $"{wine}\n";
+                sRet += $"{wine}\n   - {wine.GetType().Name}\n";
             }
             return sRet;
         }
@@ -50,7 +55,7 @@ namespace _05_Wines_Interfaces
                     _hiWine = wine;
                     _hiPrice = wine.Price;
                 }
-                if (wine.Price < _hiPrice)
+                if (wine.Price < _loPrice)
                 {
                     _loWine = wine;
                     _loPrice = wine.Price;
