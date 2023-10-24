@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04_Wines", "04_Wines\04_Win
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06_Wines_Interfaces", "05_Wines_Interfaces\06_Wines_Interfaces.csproj", "{BAB27C0C-E20A-4D5C-BD46-B102FFFFBD0C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "07_IEquatable_IComparable", "07_IEquatable_IComparable\07_IEquatable_IComparable.csproj", "{11A83D3D-549F-47A5-92D5-F8AB3D7CB7A9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{BAB27C0C-E20A-4D5C-BD46-B102FFFFBD0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAB27C0C-E20A-4D5C-BD46-B102FFFFBD0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAB27C0C-E20A-4D5C-BD46-B102FFFFBD0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11A83D3D-549F-47A5-92D5-F8AB3D7CB7A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11A83D3D-549F-47A5-92D5-F8AB3D7CB7A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11A83D3D-549F-47A5-92D5-F8AB3D7CB7A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11A83D3D-549F-47A5-92D5-F8AB3D7CB7A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
