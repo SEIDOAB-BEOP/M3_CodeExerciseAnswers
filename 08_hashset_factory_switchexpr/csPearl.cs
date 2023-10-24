@@ -20,7 +20,7 @@ namespace _08_hashset_factory_switchexpr
         public override string ToString()
         {
             var sRet = $"{Size}mm {Color} {Shape} {Type} pearl.";
-            var s = this.Size switch
+            string s = this.Size switch
             {
                 <= 10 => " A small pearl.",
                 > 10 and <= 15 => " A midsized pearl.",

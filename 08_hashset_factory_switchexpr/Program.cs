@@ -30,7 +30,10 @@ class Program
         }
 
         Console.WriteLine("\nNecklace of unique SaltWater pearls");
-        Console.WriteLine(csNecklace.Factory.CreateSaltWaterUnique());
+        csNecklace n1 = csNecklace.Factory.CreateSaltWaterUnique();
+
+        n1.ListOfPearls.Sort();
+        Console.WriteLine(n1);
 
         Console.WriteLine("\nNecklace of XL Pearls");
         Console.WriteLine(csNecklace.Factory.CreateXL(10));
