@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Xml.Linq;
-using Helpers;
+using Seido.Utilities.SeedGenerator;
 
 namespace _02_Friends;
 

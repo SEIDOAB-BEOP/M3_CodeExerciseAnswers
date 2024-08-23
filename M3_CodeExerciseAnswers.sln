@@ -5,7 +5,7 @@ VisualStudioVersion = 25.0.1706.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01_Cars", "01_Cars\01_Cars.csproj", "{3A2DCD49-6674-4AC5-9557-714898D3A317}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpers", "SeedGenerator\Helpers.csproj", "{DFB9D186-BA2B-408A-8BAF-498E98AFFFB4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "seedGenerator", "seedGenerator\seedGenerator.csproj", "{DFB9D186-BA2B-408A-8BAF-498E98AFFFB4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02_Friends", "02_Friends\02_Friends.csproj", "{404B4145-9877-4E60-9589-68B382FC416E}"
 EndProject

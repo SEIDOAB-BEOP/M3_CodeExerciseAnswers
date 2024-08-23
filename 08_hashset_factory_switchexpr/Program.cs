@@ -1,7 +1,4 @@
-﻿using System;
-using System.Reflection.Metadata;
-using System.Collections.Generic;
-using Helpers;
+﻿using Seido.Utilities.SeedGenerator;
 
 namespace _08_hashset_factory_switchexpr;
 
@@ -15,13 +12,9 @@ class Program
         var rnd = new csSeedGenerator();
         HashSet<csPearl> unique_pearls = new HashSet<csPearl>();
 
-        while(true)
+        while(unique_pearls.Count<10)
         {
             unique_pearls.Add(new csPearl(rnd) { Size=5 });
-            if (unique_pearls.Count >= 10)
-            {
-                break;
-            }
         }
         Console.WriteLine();
         foreach (var item in unique_pearls)
@@ -29,14 +22,16 @@ class Program
             Console.WriteLine(item);
         }
 
+        
         Console.WriteLine("\nNecklace of unique SaltWater pearls");
         csNecklace n1 = csNecklace.Factory.CreateSaltWaterUnique();
 
         n1.ListOfPearls.Sort();
         Console.WriteLine(n1);
-
+        
         Console.WriteLine("\nNecklace of XL Pearls");
         Console.WriteLine(csNecklace.Factory.CreateXL(10));
+        
     }
 }
 

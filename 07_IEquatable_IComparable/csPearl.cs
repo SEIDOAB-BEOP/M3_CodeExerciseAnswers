@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using System.Runtime.ConstrainedExecution;
-using Helpers;
+using Seido.Utilities.SeedGenerator;
 
 namespace _07_IEquatable_IComparable
 {

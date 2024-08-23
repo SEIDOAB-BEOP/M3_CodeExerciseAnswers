@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using Helpers;
+using Seido.Utilities.SeedGenerator;
 
 namespace _01_Cars;
 
