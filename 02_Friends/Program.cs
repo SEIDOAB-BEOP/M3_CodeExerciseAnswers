@@ -1,63 +1,6 @@
-﻿using System.Drawing;
-using System.Reflection;
-using System.Reflection.Emit;
-using System.Xml.Linq;
-using Seido.Utilities.SeedGenerator;
+﻿using Seido.Utilities.SeedGenerator;
 
 namespace _02_Friends;
-
-public enum enCarColor
-{
-    Brown, Red, Green, Burgundy
-}
-public enum enCarBrand
-{
-    Boxcar, Ford, Jaguar, Honda
-}
-public enum enCarModel
-{
-    Boxmodel, Mustang_GT, Golf, V70, XF, Civic
-}
-public class csCar
-{
-
-    private enCarColor _color;
-    public enCarColor Color
-    {
-        get => _color;
-      set => _color = value;
-    }
-
-
-    public enCarBrand Brand { get; init; }
-    public enCarModel Model { get; set; }
-
-    public csCar() { }
-    public csCar(enCarColor _color, enCarBrand _brand, enCarModel _model)
-    {
-        Color = _color;
-        Brand = _brand;
-        Model = _model;
-    }
-    public csCar(csCar org)
-    {
-        Color = org.Color;
-        Brand = org.Brand;
-        Model = org.Model;
-    }
-    public csCar(csSeedGenerator _seeder)
-    {
-
-        //alternative to SeedGenerator
-        var rnd1 = new Random();
-        Model = (enCarModel)rnd1.Next((int)enCarModel.Boxmodel, (int)enCarModel.Civic + 1);
-
-
-        Color = _seeder.FromEnum<enCarColor>();
-        Brand = _seeder.FromEnum<enCarBrand>();
-        Model = _seeder.FromEnum<enCarModel>();
-    }
-}
 
 public enum enFriendLevel
 {
@@ -65,19 +8,14 @@ public enum enFriendLevel
 }
 public class csFriend
 {
+    
     private string _name;
     public string Name
     {
-        get
-        {
-            return _name;
-        }
-        set
-        {
-            if (value == null || value == "")
-            {
-                throw new Exception("Name cannot be set to null");
-            }
+        get => _name;
+        set{
+            if (string.IsNullOrEmpty(value)) throw new ArgumentNullException(nameof(Name));
+            
             _name = value;
         }
     }
@@ -85,41 +23,66 @@ public class csFriend
     public string Email { get; set; }
     public enFriendLevel Level { get; set; }
 
-    public csCar Car { get; set; }
-        
+    public csCar Car { get; set; } = null;
 
-    public override string ToString()
-    {
-        var sRet = $"{Name} is my {Level} and can be reached at {Email}.";
-        if (Car != null)
-        {
-            sRet += $"\n -The car is a {Car.Color} {Car.Brand} {Car.Model}";
-        }
-        return sRet;
+    public override string ToString() {
+        string _sRet = $"{Name} is my {Level} and can be reached at {Email}";
+        if (Car == null)
+         {
+            _sRet += "\n   Has no car";
+         }
+         else
+         {
+            _sRet += $"\n   {Car.ToString()}";
+         }
+         return _sRet;
     }
 
-    public csFriend(csSeedGenerator _seeder)
-    {
-        string _firstName = _seeder.FirstName;
-        string _lastName = _seeder.LastName;
-        Name = $"{_firstName} {_lastName}";
 
-        Email = _seeder.Email(_firstName, _lastName);
-        Level = _seeder.FromEnum<enFriendLevel>();
-        Car = new csCar(_seeder);
-    }
-    public csFriend(string name, string email, enFriendLevel level)
+    public csFriend(string Name, string Email, enFriendLevel Level)
     {
-        Name = name;
-        Email = email;
-        Level = level;
+        this.Name = Name;
+        this.Email = Email;
+        this.Level = Level;
     }
-    public csFriend(csFriend org)
+    public csFriend(string Name, string Email, enFriendLevel Level, 
+    enCarColor carColor, enCarBrand carBrand, enCarModel carModel) : this(Name, Email, Level)
     {
-        Name = org.Name;
-        Email = org.Email;
-        Level = org.Level;
-        Car = new csCar(org.Car);
+        //this.Name = Name;
+        //this.Email = Email;
+        //this.Level = Level;
+
+        this.Car = new csCar(){ Color = carColor, Brand = carBrand, Model = carModel };
+    }
+    public csFriend(csSeedGenerator _seed)
+    {
+        string _firstName = _seed.FirstName;
+        string _lastName = _seed.LastName;
+        this.Name = $"{_firstName} {_lastName}";
+        this.Email = _seed.Email(_firstName, _lastName);
+        this.Level = _seed.FromEnum<enFriendLevel>();
+        this.Car = new csCar(_seed);
+    }
+}
+
+public enum enCarColor { Brown, Red, Green, Burgundy}
+public enum enCarBrand { Boxcar, Ford, Jaguar, Honda}
+public enum enCarModel { Boxmodel, Mustang_GT, XF, Civic}
+    
+public class csCar
+{
+    public enCarColor Color {get; init;}
+    public enCarBrand Brand {get; set;}
+    public enCarModel Model {get; set;}
+    
+    public override string ToString() => $"Owns a {Color} {Brand} {Model}";
+
+    public csCar() {}
+    public csCar(csSeedGenerator _seeder)
+    {
+        Color = _seeder.FromEnum<enCarColor>();
+        Brand = _seeder.FromEnum<enCarBrand>();
+        Model = _seeder.FromEnum<enCarModel>();           
     }
 }
 
@@ -127,34 +90,30 @@ class Program
 {
     static void Main(string[] args)
     {
-        var rnd = new csSeedGenerator();
         Console.WriteLine("Hello, Friends!");
 
-        csFriend[] friends = new csFriend[10];
-        for (int i = 0; i < 10; i++)
-        {
-            friends[i] = new csFriend(rnd);
-        }
+        var rnd = new csSeedGenerator();
+        var f1 = new csFriend("Joar Monell", "jm@gmail.com", enFriendLevel.ClassMate);
+        var f2 = new csFriend("Ashok Tamang", "at@gmail.com", enFriendLevel.ClassMate,
+            enCarColor.Burgundy, enCarBrand.Jaguar, enCarModel.XF );
+        var f3 = new csFriend(rnd);
 
+        System.Console.WriteLine(f1.ToString());
+        System.Console.WriteLine(f2);
+        System.Console.WriteLine(f3);
+
+        var friends = new List<csFriend>();
+        friends.Add(f1);
+        friends.Add(f2);
+        for (int i = 0; i < 8; i++)
+        {
+            var f = new csFriend(rnd);
+            friends.Add(f);
+        }
         foreach (var item in friends)
         {
-            Console.WriteLine(item);
+            System.Console.WriteLine(item);
         }
-
-        Console.WriteLine("\nCopy of friends");
-        csFriend[] friends_copy = new csFriend[10];
-        for (int i = 0; i < friends_copy.Length; i++)
-        {
-            friends_copy[i] = new csFriend(friends[i]);
-        }
-
-        foreach (var item in friends_copy)
-        {
-            Console.WriteLine(item);
-        }
-
-        // var friend = new csFriend("Martin", "martin@gmail.com", enFriendLevel.ClassMate);
-        // Console.WriteLine(friend.Name);
 
         /*
         #region how create a Random Name and Email address
@@ -163,14 +122,13 @@ class Program
         //A random Name
         string _firstName = rnd.FirstName;
         string _lastName = rnd.LastName;
-        Console.WriteLine($"{_firstName} {_lastName}");
+        string Name = $"{_firstName} {_lastName}";
+        Console.WriteLine(Name);
 
         //A random email address
         Console.WriteLine(rnd.Email(_firstName, _lastName));
         #endregion
         */
-
-        Console.ReadKey();
     }
 }
 
@@ -179,15 +137,15 @@ class Program
 //   Parameters and sets the corresponding properties.
 //   Create an instance of csFriend(..) settign the properties with Arguments
 
-//2. Create an empty constructor that sets all properties to random values
-//   Create an instance of csFriend() setting the properties to random values.
+//2. Create a constructor csFriend(csSeedGenerator _seeder) that sets all properties to random values and
+//   returns the initialized instance
 
-//3. Create a method ToString() in csFriend that presents the instance of csFriend.
+//3. Override method ToString() in csFriend to presents the instance of csFriend.
 //   For example "Sam Baggins is my BestFriend and can be reached at sam.baggins@gmail.com"
 
-//Advanced:
-//4. Create an array of 10 random instances of csFriend and have them present themself
+//4. Create a List<csFriend> friends, with 10 random instances of csFriend and have them present themself
 
+//Advanced:
 //5. Add a property, Car, of type csCar to csFriend class. Instantiate a csFriend
 //   as a variable friend and give your friend a random car.
 
@@ -195,15 +153,7 @@ class Program
 
 //7. Modify the setter in Name so an Error is thrown if the new name is null or ""
 
+//8. Declare a Copy constructor in csFriend and csCar
 
-// --- Gör tills 4 Oktober
-// 8. Gör om construtor csFriend() så att den tar en parameter (csSeedGenerator _seeder).
-//    Instantiera csSeedGeneratorn i Main() och modifiera koden så att den fungerar som innan.
-//
-// 10. Deklarera en Copy constructor.
-//
-// 11. Använd copy constructorn för att skapa en ny lista av 10 vänner som är en kopia
-//     av ursprungslistan
-
-
+//9. Use the copy constructor to create a copy of the list friends. Verify that it is a copy.
 
