@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03_Pearls", "03_Pearls\03_P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04_Wines", "04_Wines\04_Wines.csproj", "{2897970D-EC00-457C-AB80-777EA4CEB457}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06_Wines_Interfaces", "05_Wines_Interfaces\06_Wines_Interfaces.csproj", "{BAB27C0C-E20A-4D5C-BD46-B102FFFFBD0C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06_Wines_Interfaces", "06_Wines_Interfaces\06_Wines_Interfaces.csproj", "{BAB27C0C-E20A-4D5C-BD46-B102FFFFBD0C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "07_IEquatable_IComparable", "07_IEquatable_IComparable\07_IEquatable_IComparable.csproj", "{11A83D3D-549F-47A5-92D5-F8AB3D7CB7A9}"
 EndProject
@@ -57,6 +57,14 @@ Global
 		{64E9AC63-769F-4575-913D-499A2EF04146}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64E9AC63-769F-4575-913D-499A2EF04146}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64E9AC63-769F-4575-913D-499A2EF04146}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAD16FA4-306D-43B1-B0C9-2AC51CF5F09A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAD16FA4-306D-43B1-B0C9-2AC51CF5F09A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAD16FA4-306D-43B1-B0C9-2AC51CF5F09A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAD16FA4-306D-43B1-B0C9-2AC51CF5F09A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D824DDB-5F0A-4862-9143-A4F95407ED89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D824DDB-5F0A-4862-9143-A4F95407ED89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D824DDB-5F0A-4862-9143-A4F95407ED89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D824DDB-5F0A-4862-9143-A4F95407ED89}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

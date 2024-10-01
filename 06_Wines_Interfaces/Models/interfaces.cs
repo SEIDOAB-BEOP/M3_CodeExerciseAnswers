@@ -1,7 +1,7 @@
 ﻿using System;
 using Seido.Utilities.SeedGenerator;
 
-namespace _05_Wines_Interfaces
+namespace Models
 {
     public enum enGrapeType { Reissling, Tempranillo, Chardonay, Shiraz, CabernetSavignoin, Syrah }
     public enum enWineType { Red, White, Rose }
@@ -14,12 +14,18 @@ namespace _05_Wines_Interfaces
         public enCountry Country { get; set; }
         public enWineType WineType { get; set; }
         public enGrapeType GrapeType { get; set; }
-
         public decimal Price { get; set; }
+    }
 
-        public string ToString();
+    public interface IWineCellar
+    {
+        public string Name { get; set; }
+        public List<IWine> Wines { get; set; }
+        public void Add(IWine wine);
+        public int Count {get;}
+        public decimal Value { get;}
 
-        public IWine Seed(csSeedGenerator rnd);
+        public (IWine mostExpensive, IWine cheepest) WineHiLo(); 
     }
 }
 

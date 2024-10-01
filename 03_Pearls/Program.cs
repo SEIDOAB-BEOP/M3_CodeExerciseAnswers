@@ -1,125 +1,48 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Security.Cryptography;
+using System.Text;
+using Models;
 using Seido.Utilities.SeedGenerator;
 
 namespace _03_Pearls;
-
-public enum enPearlColor { Black, White, Pink }
-public enum enPearlShape { Round, DropShaped }
-public enum enPearlType { FreshWater, SaltWater }
-
-public class csPearl
-{
-    public const int PearlMinSize = 5;
-    public const int PearlMaxSize = 25;
-
-    public enPearlColor Color { get;  }
-    public enPearlShape Shape { get;  }
-    public enPearlType Type { get;  }
-
-    int _size;
-    public int Size
-    {
-        get => _size;
-        set
-        {
-            if (value < PearlMinSize || value > PearlMaxSize)
-                throw new ArgumentOutOfRangeException(nameof(Size));
-            _size = value;
-        }
-    }
-
-    public override string ToString() => $"{Size}mm {Color} {Shape} {Type} pearl.";
-
-    public csPearl() { }
-    public csPearl(csSeedGenerator _seeder)
-    {
-        Size = _seeder.Next(PearlMinSize, PearlMaxSize + 1);
-        Color = _seeder.FromEnum<enPearlColor>();
-        Shape = _seeder.FromEnum<enPearlShape>();
-        Type = _seeder.FromEnum<enPearlType>();
-    }
-    public csPearl(int _size, enPearlColor _color, enPearlShape _shape, enPearlType _type)
-    {
-        Size = _size;
-        Color = _color;
-        Shape = _shape;
-        Type = _type;
-    }
-    public csPearl(csPearl org)
-    {
-        Size = org.Size;
-        Color = org.Color;
-        Shape = org.Shape;
-        Type = org.Type;
-    }
-}
 
 class Program
 {
     static void Main(string[] args)
     {
-        var rnd = new csSeedGenerator();
-        Console.WriteLine("Hello, Perls!");
+        Console.WriteLine("Hello Pearls!");
+        var _seeder = new csSeedGenerator();
 
-        var p = new csPearl(5, enPearlColor.White, enPearlShape.DropShaped, enPearlType.SaltWater);
-        Console.WriteLine(p);
+        var p = new csPearl(_seeder);
+        var p1 = new csPearl(_seeder) { Type = enPearlType.SaltWater };
+        var p2 = new csPearl(7, enPearlColor.White, enPearlShape.DropShaped, enPearlType.SaltWater);
+        System.Console.WriteLine(p);
+        System.Console.WriteLine(p1);
+        System.Console.WriteLine(p2);
 
-        var pc = new csPearl(p);
-        Console.WriteLine(pc);
+        System.Console.WriteLine("Reference copy");
+        var p3 = p2;
+        p3.Size = 20;
+        System.Console.WriteLine(p2);
+        System.Console.WriteLine(p3);
 
-        var p2 = new csPearl(rnd);
-        Console.WriteLine(p2);
+        System.Console.WriteLine("Deep copy");
+        var p4 = new csPearl(p2);
+        p4.Size = 5;
+        System.Console.WriteLine(p2);
+        System.Console.WriteLine(p4);
+        
+        
+        System.Console.WriteLine("\nNecklace");
+        var n = new csNecklace(_seeder, 10);
+        System.Console.WriteLine(n);
 
-        var p2c = new csPearl(p2);
-        Console.WriteLine(p2c);
+        var n1 = new csNecklace(n);
+        System.Console.WriteLine(n1);
 
-  
-        //Create a necklace
-        csPearl[] necklace = new csPearl[10];
-        for (int i = 0; i < 10; i++)
-        {
-            necklace[i] = new csPearl(rnd);
-        }
-
-        //Find min and max pear
-        int maxSize = int.MinValue;
-        int maxIdx = 0;
-        int minSize = int.MaxValue;
-        int minIdx = 0;
-        for (int i = 0; i < 10; i++)
-        {
-            if (necklace[i].Size > maxSize)
-            {
-                maxSize = necklace[i].Size;
-                maxIdx = i;
-            }
-            if (necklace[i].Size < minSize)
-            {
-                minSize = necklace[i].Size;
-                minIdx = i;
-            }
-        }
-
-        //Present it to the user
-        Console.WriteLine("\nThis is the neclace");
-        foreach (var item in necklace)
-        {
-            Console.WriteLine(item);
-        }
-        Console.WriteLine($"Largest pearl: {necklace[maxIdx]}");
-        Console.WriteLine($"Smalest pearl: {necklace[minIdx]}");
-
-        Console.WriteLine("\n\nA necklace copy");
-        csPearl[] necklace_copy = new csPearl[10];
-        for (int i = 0; i < necklace_copy.Length; i++)
-        {
-            necklace_copy[i] = new csPearl(necklace[i]);
-        }
-        foreach (var item in necklace_copy)
-        {
-            Console.WriteLine(item);
-        }
-
+        (csPearl pmin, csPearl pmax) = n1.MaxMin();
+        System.Console.WriteLine(pmin);
+        System.Console.WriteLine(pmax);
     }
 }
 
@@ -139,12 +62,11 @@ class Program
 //
 // 5. Vilken färg, form och typ har den minsta och den största pärlan i halsbandet?
 //
-// --- Gör tills 4 Oktober
-// 6. Gör om construtor csPearl() så att den tar en parameter (csSeedGenerator _seeder).
-//    Instantiera csSeedGeneratorn i Main() och modifiera koden så att den fungerar som innan.
+// 6. Deklarera en contruktor som tillåter dig att själv bestämma alla csPearl public properties
 //
-// 7. Deklarera en contruktor som tillåter dig att själv bestämma alla csPearl public properties
+// 7. Deklarera en Copy constructor.
 //
-// 8. Deklarera en Copy constructor.
-//
-// 9. Använd copy constructorn för att skapa ett nytt halsband som är en kopia av ursprunget
+// 8. Använd copy constructorn för att skapa ett nytt halsband som är en kopia av ursprunget
+
+
+

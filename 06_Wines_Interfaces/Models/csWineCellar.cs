@@ -1,48 +1,59 @@
 ﻿using System;
-namespace _05_Wines_Interfaces
+using System.Dynamic;
+using Seido.Utilities.SeedGenerator;
+
+namespace Models
 {
-    public class WineCellar
+    public class csWineCellar : IWineCellar
     {
         public string Name { get; set; }
-        private List<IWine> Wines = new List<IWine>();
+        public List<IWine> Wines { get; set; } = new List<IWine>();
 
-
-        public void Add(IWine wine) => Wines.Add(wine);
         public int Count => Wines.Count;
-        public IWine this[int idx] => Wines[idx];
- 
-        public decimal Value
-        {
-            get
-            {
+
+        public decimal Value {
+            get {
+
                 decimal _sum = 0M;
-                foreach (var wine in Wines)
-                {
+                foreach (var wine in Wines) {
+
                     _sum += wine.Price;
                 }
+
                 return _sum;
             }
         }
 
         public override string ToString()
         {
-            var sRet = "";
+            var sRet = $"\nCellar {Name} has {Count} bottles:";
             foreach (var wine in Wines)
             {
-                sRet += $"{wine}\n   - {wine.GetType().Name}\n";
+                sRet += $"\n -{wine}";
             }
             return sRet;
         }
 
-        public WineCellar() { }
-        public WineCellar(string name)
+        public csWineCellar() { }
+        public csWineCellar(string cellarname, csSeedGenerator _seeder, int nrItems)
         {
-            Name = name;
+            Name = cellarname;
+            for (int i = 0; i < nrItems; i++)
+            {
+                Wines.Add(new csWine(_seeder));
+            }
+        }
+        public csWineCellar(string cellarname, List<IWine> wines)
+        {
+            Name = cellarname;
+            Wines = wines;
         }
 
-        public (IWine hicost, IWine locost) WineHiLoCost()
+        public void Add(IWine wine) => Wines.Add(wine);
+
+        public (IWine mostExpensive, IWine cheepest) WineHiLo()
         {
-            if (Wines.Count == 0) return (null,null);
+           if (Wines.Count == 0) return (null,null);
 
             decimal _hiPrice = decimal.MinValue;
             IWine _hiWine = null;
