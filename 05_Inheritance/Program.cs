@@ -63,7 +63,8 @@ shapes.Add(ci1);
 shapes.Add(ci2);
 foreach (var item in shapes)
 {
-   System.Console.WriteLine($"{item.GetType()} - {item.Width}  {item.Height} {item.Area} {((item is csCircle ci) ?ci.Radius :null)}");
+//   System.Console.WriteLine($"{item.GetType()} - {item.Width}  {item.Height} {item.Area} {((item is csCircle ci) ?ci.Radius :null)}");
+   System.Console.WriteLine($"{item.GetType()} - {item.Width}  {item.Height} {item.Area}");
     if (item is csCircle ci4)
     {
        System.Console.WriteLine($"Radius: {ci4.Radius}");
