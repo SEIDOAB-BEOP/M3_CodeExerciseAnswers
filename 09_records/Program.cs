@@ -9,23 +9,26 @@ using Seido.Utilities.SeedGenerator;
 Console.WriteLine("Hello Pearls!");
 var _seeder = new csSeedGenerator();
 
-//Create a pearl
-var p = new rePearl(enPearlColor.Pink, enPearlShape.Round, 5);
+var p = new rePearl(enPearlColor.Pink, enPearlShape.Round, enPearlType.SaltWater, 10);
+System.Console.WriteLine(p);
 
-//Create a random pearl
-var rp = new rePearl(_seeder.FromEnum<enPearlColor>(), _seeder.FromEnum<enPearlShape>(), _seeder.Next(5, 26));
+var rp = new rePearl(_seeder.FromEnum<enPearlColor>(),_seeder.FromEnum<enPearlShape>(), _seeder.FromEnum<enPearlType>(), _seeder.Next(5,26));
+System.Console.WriteLine(rp);
 
-//Create a list of pearls
+var rps = new rePearl(_seeder);
+System.Console.WriteLine(rps);
+
+//List of pearls
 var pearls = new List<rePearl>();
-for (int i = 0; i<10; i++)
+for (int i = 0; i < 10; i++)
 {
     pearls.Add(new rePearl(_seeder));
 }
 
-//Presten the list
+//Present the pearls
 foreach (var item in pearls)
 {
-    System.Console.WriteLine(item);
+    System.Console.WriteLine(item);;
 }
 
 
