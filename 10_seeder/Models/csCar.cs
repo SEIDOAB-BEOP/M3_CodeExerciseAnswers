@@ -13,10 +13,10 @@ public class csCar : ISeed<csCar>, IEquatable<csCar>
     
     public override string ToString() => $"I am a {Color} {Brand} {Model}";
 
-    public csCar() {}
 
     #region implement ISeed
-    public bool Seeded { get; set; }
+    public csCar() {}
+    public bool Seeded { get; set; } = false;
     public csCar Seed(csSeedGenerator _seeder)
     {
         Color = _seeder.FromEnum<enCarColor>();

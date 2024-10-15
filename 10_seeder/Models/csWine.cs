@@ -21,7 +21,7 @@ public class csWine : ISeed<csWine>
 
     #region implement ISeed
     public csWine(){}
-    public bool Seeded { get; set; }
+    public bool Seeded { get; set; } = false;
     public csWine Seed (csSeedGenerator rnd)
     {
         Name = rnd.FromString("Chattaux de bueff, Chattaux de paraply, PutiPuti, NamNam");
@@ -39,7 +39,7 @@ public class csWine : ISeed<csWine>
         (other?.Name, other?.GrapeType, other?.WineType, other?.Country, other?.Price);
 
     //Needed to implement as part of IEquatable
-    public override bool Equals(object obj) => Equals(obj as csPearl);
+    public override bool Equals(object obj) => Equals(obj as csWine);
     public override int GetHashCode() => (this.Name, this.GrapeType, this.WineType, this.Country, this.Price).GetHashCode();
     #endregion
 }

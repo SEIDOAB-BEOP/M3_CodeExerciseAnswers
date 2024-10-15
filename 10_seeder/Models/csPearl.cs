@@ -26,7 +26,7 @@ public class csPearl : ISeed<csPearl>, IEquatable<csPearl>
 
     #region implement ISeed
     public csPearl() { }
-    public bool Seeded { get; set; }
+    public bool Seeded { get; set; } = false;
 
     public csPearl Seed(csSeedGenerator _seeder)
     {

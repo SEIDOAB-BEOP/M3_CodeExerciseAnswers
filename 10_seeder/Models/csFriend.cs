@@ -30,7 +30,7 @@ public class csFriend : ISeed<csFriend>, IEquatable<csFriend>
 
     #region implement ISeed
     public csFriend(){}
-    public bool Seeded { get; set; }
+    public bool Seeded { get; set; } = false;
 
     public csFriend Seed(csSeedGenerator _seed)
     {

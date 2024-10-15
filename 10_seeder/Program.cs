@@ -7,7 +7,6 @@ var _seeder = new csSeedGenerator();
 var cars = _seeder.ItemsToList<csCar>(100);
 var ucars = _seeder.UniqueItemsToList<csCar>(100);
 
-
 var friends = _seeder.ItemsToList<csFriend>(100);
 var ufriends = _seeder.UniqueItemsToList<csFriend>(100);
 
