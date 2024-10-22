@@ -43,6 +43,13 @@ class Program
         (csPearl pmin, csPearl pmax) = n1.MaxMin();
         System.Console.WriteLine(pmin);
         System.Console.WriteLine(pmax);
+
+        System.Console.WriteLine("\nFactory");
+        var swn = csNecklace.SaltwaterOnly(_seeder, 25);
+        System.Console.WriteLine(swn);
+
+        var fwn = csNecklace.FreshwaterOnly(_seeder, 25);
+        System.Console.WriteLine(fwn);
     }
 }
 

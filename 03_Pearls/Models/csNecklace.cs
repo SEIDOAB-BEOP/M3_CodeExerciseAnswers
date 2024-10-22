@@ -52,4 +52,26 @@ public class csNecklace
             this.Pearls.Add(new csPearl(item));
         }
     }
+
+
+        public static csNecklace SaltwaterOnly (csSeedGenerator _seeder, int nrItems)
+        {
+            var n = new csNecklace(_seeder, nrItems);
+            foreach (var pearl in n.Pearls)
+            {
+                pearl.Type = enPearlType.SaltWater;
+            }
+            return n;
+        }
+        public static csNecklace FreshwaterOnly (csSeedGenerator _seeder, int nrItems)
+        {
+            var n = new csNecklace(_seeder, nrItems);
+            foreach (var pearl in n.Pearls)
+            {
+                pearl.Type = enPearlType.FreshWater;
+            }
+            return n;
+        }
+
+
 }
