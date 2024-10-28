@@ -4,6 +4,14 @@ using Models;
 public class csNecklace
 {
     private List<csPearl> Pearls {get; set;} = new List<csPearl>();
+    private static csNecklace _instance = null;
+    public static csNecklace Instance {get {
+        if (_instance == null)
+        {
+            _instance = Factory.ZebraNecklace(5);
+        }
+        return _instance;
+    }}
 
     public override string ToString(){
         
@@ -15,7 +23,32 @@ public class csNecklace
         return sRet;
     }
 
-    public csNecklace(csSeedGenerator _seeder, int nrItems)
+    public csNecklace AddLast(csPearl p)
+    {
+        Pearls.Add(p);
+        return this;
+    }
+    public csNecklace AddFirst(csPearl p) {
+        Pearls.Insert(0, p);
+        return this;
+    }
+    
+    public csNecklace RemoveFirst() {
+        if (Pearls.Count > 0)
+        {
+            Pearls.RemoveAt(0);
+        }
+        return this;
+    }
+    public csNecklace RemoveLast() {
+        if (Pearls.Count > 0)
+        {
+            Pearls.RemoveAt(Pearls.Count-1);
+        }
+        return this;
+    }
+
+    private csNecklace(csSeedGenerator _seeder, int nrItems)
     {
         for (int i = 0; i < nrItems; i++)
         {
@@ -23,7 +56,7 @@ public class csNecklace
         }
     }
 
-    public csNecklace(csNecklace org)
+    private csNecklace(csNecklace org)
     {
         foreach (var p in org.Pearls)
         {
@@ -33,11 +66,11 @@ public class csNecklace
         //this.Pearls = org.Pearls.Select(p => new csPearl(p)).ToList();
     }
 
-    public csNecklace()
+    private csNecklace()
     {
     }
 
-    public static class Factory
+    private static class Factory
     {
         public static csNecklace ZebraNecklace (int nrPearls)
         {

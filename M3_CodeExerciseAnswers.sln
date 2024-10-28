@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "11_collections", "11_collec
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "12_patterns", "12_patterns\12_patterns.csproj", "{6E53CBCF-6F23-4CF8-A8F8-490AD074CF72}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "13_Lambda", "13_Lambda\13_Lambda.csproj", "{DBFDEE97-4C79-47F0-9C2C-8CC6138D3FEC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,6 +97,10 @@ Global
 		{6E53CBCF-6F23-4CF8-A8F8-490AD074CF72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E53CBCF-6F23-4CF8-A8F8-490AD074CF72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E53CBCF-6F23-4CF8-A8F8-490AD074CF72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBFDEE97-4C79-47F0-9C2C-8CC6138D3FEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBFDEE97-4C79-47F0-9C2C-8CC6138D3FEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBFDEE97-4C79-47F0-9C2C-8CC6138D3FEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBFDEE97-4C79-47F0-9C2C-8CC6138D3FEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
